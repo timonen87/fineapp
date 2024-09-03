@@ -36,7 +36,7 @@ AFFiNE.server.port = 3010;
 AFFiNE.server.path = '/affine';
 /* The external URL of your server, will be consist of protocol + host + port by default */
 /* Useful when you want to customize the link to server resources for example the doc share link or email link */
-AFFiNE.server.externalUrl = 'http://affine.local:8080';
+// AFFiNE.server.externalUrl = 'http://affine.local:8080';
 //
 //
 // ###############################################################
@@ -69,16 +69,16 @@ AFFiNE.graphql = {
   playground: true,
 };
 
-// AFFiNE.mailer = {
-//   host: 'smtp.gmail.com',
-//   port: 465,
-//   secure: false,
-//   from: 'noreply@fineapp.pro',
-//   auth: {
-//     user: 'timonen.as@gmail.com',
-//     pass: 'dmjlguvuqxunggfr',
-//   },
-// };
+AFFiNE.mailer = {
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: false,
+  from: 'noreply@fineapp.pro',
+  auth: {
+    user: 'timonen.as@gmail.com',
+    pass: 'dmjlguvuqxunggfr',
+  },
+};
 
 //
 // /* Doc Store & Collaberation */
@@ -144,8 +144,9 @@ AFFiNE.graphql = {
 AFFiNE.use('oauth', {
   providers: {
     github: {
-      clientId: '',
-      clientSecret: '',
+      clientId:
+        '54211129985-t7k92hecs8c1bajo0k9eq2vt93jf07p6.apps.googleusercontent.com',
+      clientSecret: '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',
       // See https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps
       args: {
         scope: 'user',
@@ -175,6 +176,7 @@ AFFiNE.use('oauth', {
     },
   },
 });
+
 //
 // /* Copilot Plugin */
 // AFFiNE.use('copilot', {
