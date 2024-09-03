@@ -72,12 +72,12 @@ AFFiNE.use('payment', {
 AFFiNE.use('oauth');
 
 /* Captcha Plugin Default Config */
-AFFiNE.use('captcha', {
-  turnstile: {},
-  challenge: {
-    bits: 20,
-  },
-});
+// AFFiNE.use('captcha', {
+//   turnstile: {},
+//   challenge: {
+//     bits: 20,
+//   },
+// });
 
 if (AFFiNE.deploy) {
   AFFiNE.mailer = {
