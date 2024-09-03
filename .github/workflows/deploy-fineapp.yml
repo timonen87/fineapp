@@ -226,4 +226,4 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           provenance: true
           file: .github/deployment/node/Dockerfile
-          tags: ghcr.io/${{ github.repository }}:${{ github.sha }}:${{env.RELEASE_FLAVOR}}
+          tags: ghcr.io/${{ github.repository }}:${{env.RELEASE_FLAVOR}}
