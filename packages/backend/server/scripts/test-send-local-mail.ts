@@ -11,8 +11,8 @@ const transport = createTransport({
 });
 
 await transport.sendMail({
-  from: 'noreply@toeverything.info',
-  to: 'himself65@outlook.com',
+  from: 'timonen.as@gmail.com',
+  to: 'timonen.as@gmail.com',
   subject: 'test',
   html: `<div>hello world</div>`,
 });

@@ -1,6 +1,6 @@
 services:
   affine:
-    image: ghcr.io/toeverything/affine-graphql:stable
+    image: ghcr.io/timonen87/fineapp:stable
     # uses: ./.github/workflows/build-selfhost-image.yml
     # with:
     #   flavor: stable
@@ -27,10 +27,10 @@ services:
     restart: unless-stopped
     environment:
       - NODE_OPTIONS="--import=./scripts/register.js"
-      # - AFFINE_CONFIG_PATH=/root/.affine/config/
+      - AFFINE_CONFIG_PATH=/root/.affine/config
       - REDIS_SERVER_HOST=redis
       - DATABASE_URL=postgres://affine:affine@postgres:5432/affine_db_3
-      # - NODE_ENV=development
+      - NODE_ENV=production
       - OAUTH_GOOGLE_CLIENT_ID='54211129985-t7k92hecs8c1bajo0k9eq2vt93jf07p6.apps.googleusercontent.com'
       - OAUTH_GOOGLE_CLIENT_SECRET='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'
 
@@ -44,6 +44,15 @@ services:
       - R2_ACCESS_KEY_ID=g9qBxGAaJkPWLHwnGGb1sP
       - R2_SECRET_ACCESS_KEY=Hn1VTjmwGAhMpWBhW5YFSGjnGsQUgwQnirUJ1p4LBRL
       - REGIONAL_VK_S3_ACCOUNT=ru-msk
+
+      # AWS_SECRET_ACCESS_KEY=39QT3CMSFKwSivprv9uK37NtGM7rQyb4vMpckhDZQ5Wk
+      # AWS_S3_ENDPOINT_URL=https://wiki-bucket.hb.ru-msk.vkcs.cloud
+      # AWS_ACCESS_KEY_ID=t1JiJU4oHoPJBMBQZFcWCD
+      # - AWS_S3_USE_SSL=false
+      # - AWS_ACCESS_KEY_ID=i8s2Uwq1JKPcDuyxXtRv5S
+      # - AWS_SECRET_ACCESS_KEY=cCxbofnCBXzXFe4yg4XgZCW3HRyZFQTSyfBfty4LVojq
+      # - AWS_S3_ENDPOINT_URL=https://wiki-bucket.hb.ru-msk.vkcs.cloud
+      # - AWS_S3_REGION_NAME=ru-msk
 
       # - AFFINE_ADMIN_EMAIL=${AFFINE_ADMIN_EMAIL}
       # - AFFINE_ADMIN_PASSWORD=${AFFINE_ADMIN_PASSWORD}

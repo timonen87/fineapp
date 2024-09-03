@@ -37,8 +37,8 @@ test('should send invite email', async t => {
   const { mail, app } = t.context;
 
   if (mail.hasConfigured()) {
-    const u1 = await signUp(app, 'u1', 'u1@affine.pro', '1');
-    const u2 = await signUp(app, 'u2', 'u2@affine.pro', '1');
+    const u1 = await signUp(app, 'u1', 'timonen.as@gmail.com', '1');
+    const u2 = await signUp(app, 'u2', 'timonen.as@gmail.com', '1');
 
     const workspace = await createWorkspace(app, u1.token.token);
 

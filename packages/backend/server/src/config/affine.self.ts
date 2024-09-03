@@ -19,31 +19,56 @@ const env = process.env;
 
 AFFiNE.metrics.enabled = !AFFiNE.node.test;
 
-if (env.R2_OBJECT_STORAGE_ACCOUNT_ID) {
-  AFFiNE.use('cloudflare-r2', {
-    accountId: env.R2_OBJECT_STORAGE_ACCOUNT_ID,
-    credentials: {
-      accessKeyId: env.R2_OBJECT_STORAGE_ACCESS_KEY_ID!,
-      secretAccessKey: env.R2_OBJECT_STORAGE_SECRET_ACCESS_KEY!,
-    },
-  });
-  AFFiNE.storages.avatar.provider = 'cloudflare-r2';
-  AFFiNE.storages.avatar.bucket = 'account-avatar';
-  AFFiNE.storages.avatar.publicLinkFactory = key =>
-    `https://avatar.affineassets.com/${key}`;
+// if (env.R2_OBJECT_STORAGE_ACCOUNT_ID) {
+//   AFFiNE.use('cloudflare-r2', {
+//     accountId: env.R2_OBJECT_STORAGE_ACCOUNT_ID,
+//     credentials: {
+//       accessKeyId: env.R2_OBJECT_STORAGE_ACCESS_KEY_ID!,
+//       secretAccessKey: env.R2_OBJECT_STORAGE_SECRET_ACCESS_KEY!,
+//     },
+//   });
+//   AFFiNE.storages.avatar.provider = 'cloudflare-r2';
+//   AFFiNE.storages.avatar.bucket = 'account-avatar';
+//   AFFiNE.storages.avatar.publicLinkFactory = key =>
+//     `https://avatar.affineassets.com/${key}`;
 
-  AFFiNE.storages.blob.provider = 'cloudflare-r2';
-  AFFiNE.storages.blob.bucket = `workspace-blobs-${
-    AFFiNE.affine.canary ? 'canary' : 'prod'
-  }`;
+//   AFFiNE.storages.blob.provider = 'cloudflare-r2';
+//   AFFiNE.storages.blob.bucket = `workspace-blobs-${
+//     AFFiNE.affine.canary ? 'canary' : 'prod'
+//   }`;
 
-  AFFiNE.use('copilot', {
-    storage: {
-      provider: 'cloudflare-r2',
-      bucket: `workspace-copilot-${AFFiNE.affine.canary ? 'canary' : 'prod'}`,
-    },
-  });
-}
+//   AFFiNE.use('copilot', {
+//     storage: {
+//       provider: 'cloudflare-r2',
+//       bucket: `workspace-copilot-${AFFiNE.affine.canary ? 'canary' : 'prod'}`,
+//     },
+//   });
+// }
+
+AFFiNE.use('vk-s3', {
+  region: env.REGIONAL_VK_S3_ACCOUNT!,
+  endpoint: `https://wiki-bucket.hb.ru-msk.vkcs.cloud`,
+  credentials: {
+    accessKeyId: env.R2_OBJECT_STORAGE_ACCESS_KEY_ID!,
+    secretAccessKey: env.R2_OBJECT_STORAGE_SECRET_ACCESS_KEY!,
+  },
+});
+AFFiNE.storages.avatar.provider = 'vk-s3';
+AFFiNE.storages.avatar.bucket = 'account-avatar';
+AFFiNE.storages.avatar.publicLinkFactory = key =>
+  `https://fine-app.hb.ru-msk.vkcloud-storage.ru/${key}`;
+
+AFFiNE.storages.blob.provider = 'vk-s3';
+AFFiNE.storages.blob.bucket = `workspace-blobs-${
+  AFFiNE.affine.canary ? 'canary' : 'prod'
+}`;
+
+AFFiNE.use('copilot', {
+  storage: {
+    provider: 'cloudflare-r2',
+    bucket: `workspace-copilot-${AFFiNE.affine.canary ? 'canary' : 'prod'}`,
+  },
+});
 
 AFFiNE.use('copilot', {
   openai: {
@@ -53,6 +78,7 @@ AFFiNE.use('copilot', {
     apiKey: '',
   },
 });
+
 AFFiNE.use('redis', {
   host: env.REDIS_SERVER_HOST,
   db: 0,

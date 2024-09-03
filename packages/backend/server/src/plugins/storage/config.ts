@@ -8,6 +8,7 @@ declare module '../../fundamentals/storage/config' {
     // the type here is only existing for extends [StorageProviderType] with better type inference and checking.
     'cloudflare-r2'?: WARNING;
     'aws-s3'?: WARNING;
+    'vk-s3'?: WARNING;
   }
 }
 
@@ -16,12 +17,18 @@ export type R2StorageConfig = S3ClientConfigType & {
   accountId?: string;
 };
 
+export type VkStorageConfig = S3ClientConfigType & {
+  region?: string;
+};
+
 declare module '../config' {
   interface PluginsConfig {
     'aws-s3': ModuleConfig<S3ClientConfig>;
     'cloudflare-r2': ModuleConfig<R2StorageConfig>;
+    'vk-s3': ModuleConfig<VkStorageConfig>;
   }
 }
 
 defineStartupConfig('plugins.aws-s3', {});
 defineStartupConfig('plugins.cloudflare-r2', {});
+defineStartupConfig('plugins.vk-s3', {});

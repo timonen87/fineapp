@@ -4,6 +4,15 @@ import { registerStorageProvider } from '../../fundamentals/storage';
 import { Plugin } from '../registry';
 import { R2StorageProvider } from './providers/r2';
 import { S3StorageProvider } from './providers/s3';
+import { VkStorageProvider } from './providers/vk';
+
+registerStorageProvider('vk-s3', (config, bucket) => {
+  if (!config.plugins['vk-s3']) {
+    throw new Error('Missing vk-s3 storage provider configuration');
+  }
+
+  return new VkStorageProvider(config.plugins['vk-s3'], bucket);
+});
 
 registerStorageProvider('cloudflare-r2', (config, bucket) => {
   if (!config.plugins['cloudflare-r2']) {
@@ -19,6 +28,17 @@ registerStorageProvider('aws-s3', (config, bucket) => {
 
   return new S3StorageProvider(config.plugins['aws-s3'], bucket);
 });
+
+@Plugin({
+  name: 'vk-s3',
+  requires: [
+    'plugins.vk-s3.region',
+    'plugins.vk-s3.credentials.accessKeyId',
+    'plugins.vk-s3.credentials.secretAccessKey',
+  ],
+  if: config => config.flavor.graphql,
+})
+export class VkS3Module {}
 
 @Plugin({
   name: 'cloudflare-r2',
