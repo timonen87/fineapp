@@ -12,8 +12,8 @@ export const R2_BUCKET =
 
 export class WebpackS3Plugin implements WebpackPluginInstance {
   private readonly s3 = new S3Client({
-    region: 'ru-msk',
-    endpoint: 'https://fine-app.hb.ru-msk.vkcloud-storage.ru',
+    region: 'auto',
+    endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
     credentials: {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       accessKeyId: process.env.R2_ACCESS_KEY_ID!,
