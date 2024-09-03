@@ -31,12 +31,12 @@ AFFiNE.server.https = false;
 AFFiNE.server.host = 'localhost';
 // /* The local port of your server that will listen on */
 AFFiNE.server.port = 3010;
-/* The sub path of your server */
-/* For example, if you set `AFFiNE.server.path = '/affine'`, then the server will be available at `${domain}/affine` */
-AFFiNE.server.path = '/affine';
-/* The external URL of your server, will be consist of protocol + host + port by default */
-/* Useful when you want to customize the link to server resources for example the doc share link or email link */
-// AFFiNE.server.externalUrl = 'http://affine.local:8080';
+// /* The sub path of your server */
+// /* For example, if you set `AFFiNE.server.path = '/affine'`, then the server will be available at `${domain}/affine` */
+// AFFiNE.server.path = '/affine';
+// /* The external URL of your server, will be consist of protocol + host + port by default */
+// /* Useful when you want to customize the link to server resources for example the doc share link or email link */
+// AFFiNE.server.externalUrl = 'http://affine.local:8080'
 //
 //
 // ###############################################################
@@ -48,38 +48,26 @@ AFFiNE.server.path = '/affine';
 // AFFiNE.metrics.enabled = true;
 //
 //
-AFFiNE.auth.session = {
-  /* How long the login session would last by default */
-  ttl: 15 * 24 * 60 * 60, // 15 days
-  /* How long we should refresh the token before it getting expired */
-  ttr: 7 * 24 * 60 * 60, // 7 days
-};
+// AFFiNE.auth.session = {
+//   /* How long the login session would last by default */
+//   ttl: 15 * 24 * 60 * 60, // 15 days
+//   /* How long we should refresh the token before it getting expired */
+//   ttr: 7 * 24 * 60 * 60, // 7 days
+// };
 //
-/* GraphQL configurations that control the behavior of the Apollo Server behind */
-/* @see https://www.apollographql.com/docs/apollo-server/api/apollo-server */
-AFFiNE.graphql = {
-  /* Path to mount GraphQL API */
-  path: '/graphql',
-  buildSchemaOptions: {
-    numberScalarMode: 'integer',
-  },
-  /* Whether allow client to query the schema introspection */
-  introspection: true,
-  /* Whether enable GraphQL Playground UI */
-  playground: true,
-};
-
-AFFiNE.mailer = {
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: false,
-  from: 'noreply@fineapp.pro',
-  auth: {
-    user: 'timonen.as@gmail.com',
-    pass: 'dmjlguvuqxunggfr',
-  },
-};
-
+// /* GraphQL configurations that control the behavior of the Apollo Server behind */
+// /* @see https://www.apollographql.com/docs/apollo-server/api/apollo-server */
+// AFFiNE.graphql = {
+//   /* Path to mount GraphQL API */
+//   path: '/graphql',
+//   buildSchemaOptions: {
+//     numberScalarMode: 'integer',
+//   },
+//   /* Whether allow client to query the schema introspection */
+//   introspection: true,
+//   /* Whether enable GraphQL Playground UI */
+//   playground: true,
+// }
 //
 // /* Doc Store & Collaberation */
 // /* How long the buffer time of creating a new history snapshot when doc get updated */
@@ -107,6 +95,15 @@ AFFiNE.mailer = {
 // });
 //
 //
+// /* Captcha Plugin Default Config */
+// AFFiNE.plugins.use('captcha', {
+//   turnstile: {},
+//   challenge: {
+//     bits: 20,
+//   },
+// });
+//
+//
 // /* Cloudflare R2 Plugin */
 // /* Enable if you choose to store workspace blobs or user avatars in Cloudflare R2 Storage Service */
 // AFFiNE.use('cloudflare-r2', {
@@ -117,66 +114,52 @@ AFFiNE.mailer = {
 //   },
 // });
 //
-/* AWS S3 Plugin */
-/* Enable if you choose to store workspace blobs or user avatars in AWS S3 Storage Service */
-// AFFiNE.use('vk-s3', {
-//   credentials: {
-//     region: 'ru-msk',
-//     accessKeyId: '',
-//     secretAccessKey: '',
-//     endpoint:"https://wiki-bucket.hb.ru-msk.vkcs.cloud",
-
-//   }
-// });
-
-// region_name=AWS_S3_REGION_NAME,
-// use_ssl=AWS_S3_USE_SSL,
-// aws_access_key_id=AWS_ACCESS_KEY_ID,
-// aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-// endpoint_url=AWS_S3_ENDPOINT_URL,
-
+// /* AWS S3 Plugin */
+// /* Enable if you choose to store workspace blobs or user avatars in AWS S3 Storage Service */
+// AFFiNE.use('aws-s3', {
+//  credentials: {
+//    accessKeyId: '',
+//    secretAccessKey: '',
+// })
 // /* Update the provider of storages */
-// AFFiNE.storages.blob.provider = 'aws-s3';
-// AFFiNE.storages.avatar.provider = 'aws-s3';
-
+// AFFiNE.storages.blob.provider = 'cloudflare-r2';
+// AFFiNE.storages.avatar.provider = 'cloudflare-r2';
 //
-/* OAuth Plugin */
-AFFiNE.use('oauth', {
-  providers: {
-    github: {
-      clientId:
-        '54211129985-t7k92hecs8c1bajo0k9eq2vt93jf07p6.apps.googleusercontent.com',
-      clientSecret: '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',
-      // See https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps
-      args: {
-        scope: 'user',
-      },
-    },
-    google: {
-      clientId: '',
-      clientSecret: '',
-      args: {
-        // See https://developers.google.com/identity/protocols/oauth2
-        scope: 'openid email profile',
-        promot: 'select_account',
-        access_type: 'offline',
-      },
-    },
-    oidc: {
-      // OpenID Connect
-      issuer: '',
-      clientId: '',
-      clientSecret: '',
-      args: {
-        scope: 'openid email profile',
-        claim_id: 'preferred_username',
-        claim_email: 'email',
-        claim_name: 'name',
-      },
-    },
-  },
-});
-
+// /* OAuth Plugin */
+// AFFiNE.use('oauth', {
+//   providers: {
+//     github: {
+//       clientId: '',
+//       clientSecret: '',
+//       // See https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps
+//       args: {
+//         scope: 'user',
+//       },
+//     },
+//     google: {
+//       clientId: '',
+//       clientSecret: '',
+//       args: {
+//         // See https://developers.google.com/identity/protocols/oauth2
+//         scope: 'openid email profile',
+//         promot: 'select_account',
+//         access_type: 'offline',
+//       },
+//     },
+//     oidc: {
+//       // OpenID Connect
+//       issuer: '',
+//       clientId: '',
+//       clientSecret: '',
+//       args: {
+//         scope: 'openid email profile',
+//         claim_id: 'preferred_username',
+//         claim_email: 'email',
+//         claim_name: 'name',
+//       },
+//     },
+//   },
+// });
 //
 // /* Copilot Plugin */
 // AFFiNE.use('copilot', {

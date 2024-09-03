@@ -1,9 +1,7 @@
 services:
   affine:
     image: ghcr.io/timonen87/fineapp:stable
-    # uses: ./.github/workflows/build-selfhost-image.yml
-    # with:
-    #   flavor: stable
+
     container_name: affine_selfhosted
     command:
       ['sh', '-c', 'node ./scripts/self-host-predeploy && node ./dist/index.js']
@@ -30,9 +28,8 @@ services:
       - AFFINE_CONFIG_PATH=/root/.affine/config
       - REDIS_SERVER_HOST=redis
       - DATABASE_URL=postgres://affine:affine@postgres:5432/affine_db_3
-      - AFFINE_SERVER_PORT=3010
-      - AFFINE_SERVER_HOST=localhost
-      - AFFINE_SERVER_HTTPS=false
+      - DEV_SERVER_URL=http://localhost:3010
+
       - NODE_ENV=production
       - OAUTH_GOOGLE_CLIENT_ID='54211129985-t7k92hecs8c1bajo0k9eq2vt93jf07p6.apps.googleusercontent.com'
       - OAUTH_GOOGLE_CLIENT_SECRET='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'
@@ -91,3 +88,13 @@ services:
       POSTGRES_PASSWORD: affine
       POSTGRES_DB: affine
       PGDATA: /var/lib/postgresql/data/pgdata
+  watchtower:
+    image: containrrr/watchtower
+    restart: unless-stopped
+    container_name: watchtower
+    environment:
+      - WATCHTOWER_POLL_INTERVAL=1800
+      - WATCHTOWER_CLEANUP=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/config.json

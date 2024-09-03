@@ -45,31 +45,6 @@ if (env.R2_OBJECT_STORAGE_ACCOUNT_ID) {
   });
 }
 
-// AFFiNE.use('vk-s3', {
-//   region: env.REGIONAL_VK_S3_ACCOUNT!,
-//   endpoint: `https://wiki-bucket.hb.ru-msk.vkcs.cloud`,
-//   credentials: {
-//     accessKeyId: env.R2_OBJECT_STORAGE_ACCESS_KEY_ID!,
-//     secretAccessKey: env.R2_OBJECT_STORAGE_SECRET_ACCESS_KEY!,
-//   },
-// });
-// AFFiNE.storages.avatar.provider = 'vk-s3';
-// AFFiNE.storages.avatar.bucket = 'account-avatar';
-// AFFiNE.storages.avatar.publicLinkFactory = key =>
-//   `https://fine-app.hb.ru-msk.vkcloud-storage.ru/${key}`;
-
-// AFFiNE.storages.blob.provider = 'vk-s3';
-// AFFiNE.storages.blob.bucket = `workspace-blobs-${
-//   AFFiNE.affine.canary ? 'canary' : 'prod'
-// }`;
-
-// AFFiNE.use('copilot', {
-//   storage: {
-//     provider: 'cloudflare-r2',
-//     bucket: `workspace-copilot-${AFFiNE.affine.canary ? 'canary' : 'prod'}`,
-//   },
-// });
-
 AFFiNE.use('copilot', {
   openai: {
     apiKey: '',
@@ -78,7 +53,6 @@ AFFiNE.use('copilot', {
     apiKey: '',
   },
 });
-
 AFFiNE.use('redis', {
   host: env.REDIS_SERVER_HOST,
   db: 0,
@@ -96,6 +70,14 @@ AFFiNE.use('payment', {
   },
 });
 AFFiNE.use('oauth');
+
+/* Captcha Plugin Default Config */
+AFFiNE.use('captcha', {
+  turnstile: {},
+  challenge: {
+    bits: 20,
+  },
+});
 
 if (AFFiNE.deploy) {
   AFFiNE.mailer = {
