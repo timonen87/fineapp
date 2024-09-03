@@ -1,6 +1,6 @@
 services:
   affine:
-    image: ghcr.io/toeverything/affine-graphql:stable
+    image: ghcr.io/timonen87/fineapp:stable
     # uses: ./.github/workflows/build-selfhost-image.yml
     # with:
     #   flavor: stable
