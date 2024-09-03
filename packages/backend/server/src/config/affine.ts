@@ -119,14 +119,15 @@ AFFiNE.graphql = {
 //
 /* AWS S3 Plugin */
 /* Enable if you choose to store workspace blobs or user avatars in AWS S3 Storage Service */
-AFFiNE.use('vk-s3', {
-  credentials: {
-    region: 'ru-msk',
-    accessKeyId: '',
-    secretAccessKey: '',
-    endpoint: 'https://wiki-bucket.hb.ru-msk.vkcs.cloud',
-  },
-});
+// AFFiNE.use('vk-s3', {
+//   credentials: {
+//     region: 'ru-msk',
+//     accessKeyId: '',
+//     secretAccessKey: '',
+//     endpoint:"https://wiki-bucket.hb.ru-msk.vkcs.cloud",
+
+//   }
+// });
 
 // region_name=AWS_S3_REGION_NAME,
 // use_ssl=AWS_S3_USE_SSL,
@@ -135,8 +136,8 @@ AFFiNE.use('vk-s3', {
 // endpoint_url=AWS_S3_ENDPOINT_URL,
 
 // /* Update the provider of storages */
-AFFiNE.storages.blob.provider = 'vk-s3';
-AFFiNE.storages.avatar.provider = 'vk-s3';
+// AFFiNE.storages.blob.provider = 'aws-s3';
+// AFFiNE.storages.avatar.provider = 'aws-s3';
 
 //
 /* OAuth Plugin */
