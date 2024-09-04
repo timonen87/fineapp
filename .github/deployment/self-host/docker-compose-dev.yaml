@@ -27,8 +27,8 @@ services:
       - NODE_OPTIONS="--import=./scripts/register.js"
       - AFFINE_CONFIG_PATH=/root/.affine/config
       - REDIS_SERVER_HOST=redis
-      - DATABASE_URL=postgres://affine:affine@postgres:5432/affine_db_3
-      - DEV_SERVER_URL=http://localhost:3010
+      - DATABASE_URL=postgres://affine:affine@postgres:5432/affine_db_4
+      - AFFINE_SERVER_EXTERNAL_URL=http://localhost:3010
 
       - NODE_ENV=production
       - OAUTH_GOOGLE_CLIENT_ID='54211129985-t7k92hecs8c1bajo0k9eq2vt93jf07p6.apps.googleusercontent.com'
